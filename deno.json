@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "lib": ["deno.window", "dom", "dom.iterable", "dom.asynciterable", "esnext"],
+    "strict": true
+  },
+  "tasks": {
+    "serve": "deno run --allow-net --allow-read jsr:@std/http/file-server --port 8080 --index webrtc.html dist",
+    "bundle": "deno bundle public/webrtc.html",
+    "watch": "deno task bundle --outdir dist --watch",
+    "build": "deno task bundle --outdir dist"
+  }
+}

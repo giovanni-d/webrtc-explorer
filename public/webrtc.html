@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC Screen Share - Manual Signaling</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.green.min.css">
+    <style>
+        :root {
+            --pico-font-size: 16px;
+        }
+
+        .no-margin {
+            margin-bottom: 0px;
+        }
+
+        button {
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <header class="container">
+            <h1>WebRTC Screen Share - Manual Signaling</h1>
+            <p>Open this file twice, on a server window/tab and on a receiver window/tab.</p>
+        </header>
+
+        <main class="container">
+            <div class="grid">
+                <div>
+                    <article>
+                        <header>
+                            <h4 class="no-margin">Sender</h4>
+                        </header>
+
+                        <section>
+                            <button onclick="startScreenCapture()">Start Screen Share</button>
+                            <button onclick="stopScreenCapture()">Stop</button>
+                        </section>
+
+                        <section>
+                            <label for="qualitySelect">Quality:</label>
+                            <select id="qualitySelect">
+                                <option value="1000000">Low (1 Mbps)</option>
+                                <option value="2500000">Medium (2.5 Mbps)</option>
+                                <option value="5000000" selected>High (5 Mbps)</option>
+                                <option value="10000000">Ultra (10 Mbps)</option>
+                                <option value="20000000">Max (20 Mbps)</option>
+                            </select>
+                        </section>
+
+                        <section>
+                            <h3>Local Preview</h3>
+                            <video id="localVideo" autoplay muted width="100%"></video>
+                        </section>
+
+                        <section>
+                            <h3>Status</h3>
+                            <p id="senderStatus">Ready</p>
+                        </section>
+
+                        <section>
+                            <button onclick="generateOffer()">Generate Offer</button>
+                        </section>
+
+                        <section>
+                            <label for="offerText">Offer (copy to receiver):</label>
+                            <textarea id="offerText" readonly></textarea>
+                            <div id="offerQR"></div>
+                        </section>
+
+                        <section>
+                            <label for="answerInput">Paste Answer from Receiver:</label>
+                            <textarea id="answerInput"></textarea>
+                            <button onclick="applyAnswer()">Apply Answer</button>
+                        </section>
+                    </article>
+                </div>
+
+                <div>
+                    <article>
+                        <header>
+                            <h4 class="no-margin">Receiver</h2>
+                        </header>
+
+                        <section>
+                            <label for="offerInput">Paste Offer from Sender:</label>
+                            <textarea id="offerInput"></textarea>
+                            <button onclick="receiveOffer()">Apply Offer</button>
+                        </section>
+
+                        <section>
+                            <h3>Remote Video</h3>
+                            <video id="remoteVideo" autoplay muted controls width="100%"></video>
+                            <button onclick="enableAudio()">🔊 Enable Audio</button>
+                        </section>
+
+                        <section>
+                            <h3>Status</h3>
+                            <p id="receiverStatus">Waiting for offer</p>
+                        </section>
+
+                        <section>
+                            <label for="answerText">Answer (copy back to sender):</label>
+                            <textarea id="answerText" readonly></textarea>
+                            <div id="answerQR"></div>
+                        </section>
+                    </article>
+                </div>
+
+                <div>
+                    <article>
+                        <header>
+                            <h4 class="no-margin">Log</h4>
+                        </header>
+
+                        <section>
+                            <div class="overflow-auto no-margin" style="height: 700px;">
+                                <pre id="log"></pre>
+                            </div>
+                        </section>
+                    </article>
+                </div>
+            </div>
+        </main>
+
+    </main>
+
+    <script src="../src/webrtc.ts"></script>
+</body>
+
+</html>
