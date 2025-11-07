@@ -41,7 +41,6 @@ webrtc-explorer/
 │   └── webrtc.html       # Main HTML interface
 ├── src/
 │   ├── webrtc.ts         # WebRTC logic (signaling, peer connection)
-│   └── inline.ts         # Build script for inlining JS
 ├── dist/                 # Build output
 └── deno.json             # Deno configuration and tasks
 ```
