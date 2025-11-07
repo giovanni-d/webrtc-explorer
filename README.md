@@ -9,6 +9,8 @@ required.
 - Manual copy/paste signaling (no signaling server needed)
 - Adjustable video quality (1-20 Mbps)
 
+![WebRTC Explorer Screenshot](public/screenshot.png)
+
 ## Quick Start
 
 ```bash
